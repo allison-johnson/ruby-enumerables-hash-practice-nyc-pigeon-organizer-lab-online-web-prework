@@ -4,10 +4,14 @@ def nyc_pigeon_organizer(data)
     outer_val.each_pair do |inner_key, inner_val|
       inner_val.each do |name|
         if new_hash[name] #name already a key in new_hash
-          new_hash[name][outer_key] = inner_key.to_s
+		  if new_hash[name][outer_key]
+			new_hash[name][outer_key] << [inner_key.to_s]
+		  else
+		    new_hash[name][outer_key] = [inner_key.to_s]
+		  end #end inner if
         else
           new_hash[name] = Hash.new
-          new_hash[name][outer_key] = inner_key.to_s
+          new_hash[name][outer_key] = [inner_key.to_s]
         end #end if 
       end #end inner each 
     end #end middle each 
